@@ -1,49 +1,45 @@
-import pkg from 'pg';
-const { Pool } = pkg;
-
-let pool;
-
-function getPool() {
-  if (pool) return pool;
-
-  const url = process.env.DATABASE_URL;
-
-  pool = new Pool({
-    connectionString: url,
-    ssl: { rejectUnauthorized: false },
-  });
-
-  return pool;
-}
+import { neon } from "@neondatabase/serverless";
 
 export default async function handler(req, res) {
-  if (req.method === 'GET') {
-    return res.status(200).json({ ok: true, message: 'Endpoint listo. Usa POST.' });
-  }
 
-  if (req.method !== 'POST') {
-    return res.status(405).json({ ok: false });
+  if (req.method !== "POST") {
+    return res.status(405).json({ ok:false, message:"Método no permitido" });
   }
 
   try {
-    const body =
-      typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
 
-    const email = body?.email;
+    const { businessName, phone, email } = req.body;
 
-    if (!email) {
-      return res.status(400).json({ ok: false, message: 'Email requerido' });
+    if (!businessName) {
+      return res.status(400).json({ ok:false, message:"Falta el nombre del negocio" });
     }
 
-    const p = getPool();
+    if (!phone) {
+      return res.status(400).json({ ok:false, message:"Falta el teléfono" });
+    }
 
-    await p.query(
-      'INSERT INTO leads (email) VALUES ($1) ON CONFLICT (email) DO NOTHING',
-      [email]
-    );
+    if (!email) {
+      return res.status(400).json({ ok:false, message:"Falta el email" });
+    }
 
-    return res.status(200).json({ ok: true, message: 'Correo guardado' });
-  } catch (error) {
-    return res.status(500).json({ ok: false, error: String(error) });
+    const sql = neon(process.env.DATABASE_URL);
+
+    await sql`
+      INSERT INTO leads (business_name, phone, email)
+      VALUES (${businessName}, ${phone}, ${email})
+    `;
+
+    return res.status(200).json({
+      ok:true,
+      message:"Lead guardado correctamente 🚀"
+    });
+
+  } catch(err) {
+
+    return res.status(500).json({
+      ok:false,
+      message:"Error guardando lead"
+    });
+
   }
 }
