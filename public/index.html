@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RevenueIQ — Reduce churn antes de que pase</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
   <header class="nav">
     <div class="container nav-inner">
@@ -51,7 +53,9 @@
         <div class="mock">
           <div class="card">
             <div class="card-top">
-              <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
             </div>
             <div class="card-body">
               <div class="kpi">
@@ -80,13 +84,23 @@
       <div class="container cta-inner">
         <div>
           <h2>Empieza con un análisis rápido de tu empresa</h2>
-          <p>Deja tu correo y te “activamos” el análisis. (Se guarda local en tu compu.)</p>
+          <p>Deja tus datos y te activamos el análisis.</p>
         </div>
 
         <form id="leadForm" class="form">
+
+          <input id="businessName" type="text" placeholder="Nombre del negocio" required />
+
+          <input id="phone" type="tel" placeholder="Teléfono" required />
+
           <input id="email" type="email" placeholder="tu@empresa.com" required />
-          <button class="btn primary" type="submit">Empezar análisis</button>
+
+          <button class="btn primary" type="submit">
+            Empezar análisis
+          </button>
+
           <p id="msg" class="msg" aria-live="polite"></p>
+
         </form>
       </div>
     </section>
@@ -94,4 +108,5 @@
 
   <script src="script.js"></script>
 </body>
+
 </html>
