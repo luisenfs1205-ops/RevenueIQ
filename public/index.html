@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RevenueIQ — Reduce churn antes de que pase</title>
+  <title>RevenueIQ Fitness — Detecta miembros en riesgo antes de que cancelen</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -14,7 +14,7 @@
       <div class="logo">Revenue<span>IQ</span></div>
       <a class="nav-link" href="#como-funciona">Cómo funciona</a>
       <a class="nav-link" href="#features">Features</a>
-      <a class="nav-cta" href="#cta">Empezar</a>
+      <a class="nav-cta" href="#cta">Solicitar análisis</a>
     </div>
   </header>
 
@@ -22,30 +22,33 @@
     <section class="hero">
       <div class="container hero-grid">
         <div>
-          <p class="eyebrow">IA predictiva para SaaS B2B</p>
-          <h1>Predice churn 30 días antes y actúa automático.</h1>
+          <p class="eyebrow">Inteligencia de retención para negocios fitness</p>
+
+          <h1>Detecta qué miembros están por dejarte antes de que cancelen.</h1>
+
           <p class="sub">
-            RevenueIQ se conecta por API, aprende de tus datos y te avisa qué clientes están en riesgo.
-            Luego dispara acciones para retenerlos: alertas, segmentación y automatizaciones.
+            RevenueIQ Fitness ayuda a gimnasios, estudios boutique y clubes de pádel
+            a identificar miembros en riesgo usando asistencia, renovaciones y cambios
+            de comportamiento para proteger ingresos recurrentes.
           </p>
 
           <div class="hero-actions">
-            <a class="btn primary" href="#cta">Iniciar análisis</a>
+            <a class="btn primary" href="#cta">Solicita tu análisis</a>
             <a class="btn secondary" href="#como-funciona">Ver cómo funciona</a>
           </div>
 
           <div class="trust">
             <div class="trust-item">
-              <div class="trust-num">≥20%</div>
-              <div class="trust-txt">meta de reducción de churn</div>
+              <div class="trust-num">48 hrs</div>
+              <div class="trust-txt">tiempo máximo de entrega del reporte</div>
             </div>
             <div class="trust-item">
-              <div class="trust-num">&lt; 7 días</div>
-              <div class="trust-txt">implementación objetivo</div>
+              <div class="trust-num">3-5 min</div>
+              <div class="trust-txt">tiempo requerido del cliente al mes</div>
             </div>
             <div class="trust-item">
-              <div class="trust-num">&lt; 90 días</div>
-              <div class="trust-txt">ROI esperado</div>
+              <div class="trust-num">80-400</div>
+              <div class="trust-txt">miembros activos ideales por negocio</div>
             </div>
           </div>
         </div>
@@ -59,23 +62,27 @@
             </div>
             <div class="card-body">
               <div class="kpi">
-                <div class="kpi-label">Clientes en riesgo</div>
+                <div class="kpi-label">Miembros en riesgo</div>
                 <div class="kpi-value">14%</div>
               </div>
+
               <div class="bar">
                 <div class="bar-fill" style="width: 68%"></div>
               </div>
+
               <div class="list">
-                <div class="row"><span class="pill red"></span> Riesgo alto — 9 cuentas</div>
-                <div class="row"><span class="pill yellow"></span> Riesgo medio — 21 cuentas</div>
-                <div class="row"><span class="pill green"></span> Riesgo bajo — 118 cuentas</div>
+                <div class="row"><span class="pill red"></span> Riesgo alto — 9 miembros</div>
+                <div class="row"><span class="pill yellow"></span> Riesgo medio — 21 miembros</div>
+                <div class="row"><span class="pill green"></span> Riesgo bajo — 118 miembros</div>
               </div>
+
               <div class="rule">
-                <span class="mono">IF</span> risk &gt; 70% <span class="mono">THEN</span> crear alerta + tarea CS
+                <span class="mono">IF</span> días sin asistir &gt; 15 y renovación &lt; 7 días
+                <span class="mono">THEN</span> riesgo alto
               </div>
             </div>
           </div>
-          <p class="mock-note">Mock conceptual: dashboard + alertas + reglas.</p>
+          <p class="mock-note">Mock conceptual: análisis de retención para negocios fitness.</p>
         </div>
       </div>
     </section>
@@ -83,24 +90,22 @@
     <section id="cta" class="cta">
       <div class="container cta-inner">
         <div>
-          <h2>Empieza con un análisis rápido de tu empresa</h2>
-          <p>Deja tus datos y te activamos el análisis.</p>
+          <h2>Solicita tu análisis de retención</h2>
+          <p>Déjanos tus datos y te contactamos para revisar tu gimnasio, estudio o club.</p>
         </div>
 
         <form id="leadForm" class="form">
-
           <input id="businessName" type="text" placeholder="Nombre del negocio" required />
 
           <input id="phone" type="tel" placeholder="Teléfono" required />
 
-          <input id="email" type="email" placeholder="tu@empresa.com" required />
+          <input id="email" type="email" placeholder="tu@negocio.com" required />
 
           <button class="btn primary" type="submit">
-            Empezar análisis
+            Solicitar análisis
           </button>
 
           <p id="msg" class="msg" aria-live="polite"></p>
-
         </form>
       </div>
     </section>
