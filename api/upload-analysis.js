@@ -67,13 +67,20 @@ export default async function handler(req, res) {
         const arrayBuffer = await file.arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
 
-        const blob = await put(`analysis-uploads/${Date.now()}-${file.name}`, buffer, {
-            access: "private",
-            contentType: file.type || "application/octet-stream",
-        });
+        // SUBIR ARCHIVO A BLOB
+        const blob = await put(
+            `analysis-uploads/${Date.now()}-${file.name}`,
+            buffer,
+            {
+                access: "private",
+                contentType: file.type || "application/octet-stream",
+            }
+        );
 
+        // CONECTAR A NEON
         const sql = neon(process.env.DATABASE_URL);
 
+        // GUARDAR REGISTRO EN DB
         await sql`
       INSERT INTO analysis_uploads
       (business_name, email, phone, business_type, period_covered, notes, file_name, file_url)
@@ -85,8 +92,10 @@ export default async function handler(req, res) {
             ok: true,
             message: "Archivo recibido correctamente.",
         });
+
     } catch (error) {
-        console.error(error);
+        console.error("UPLOAD ERROR:", error);
+
         return res.status(500).json({
             ok: false,
             message: "No pude guardar el archivo.",
