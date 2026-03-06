@@ -28,9 +28,15 @@ form.addEventListener("submit", async (e) => {
     msg.textContent = data.message || "Listo.";
 
     if (data.ok) {
-      businessNameInput.value = "";
-      phoneInput.value = "";
-      emailInput.value = "";
+
+      // guardar datos temporalmente para usarlos en portal.html
+      localStorage.setItem("businessName", businessName);
+      localStorage.setItem("phone", phone);
+      localStorage.setItem("email", email);
+
+      // redirigir al portal para subir archivos
+      window.location.href = "portal.html";
+
     }
 
   } catch {
@@ -68,7 +74,6 @@ if (simulateBtn) {
     const safeLowAttendance = Math.max(0, lowAttendance || 0);
     const safeRenewalsSoon = Math.max(0, renewalsSoon || 0);
 
-    /* fórmula simple de estimación */
     const estimatedRisk = Math.round(
       (safeLowAttendance * 0.6) +
       (safeRenewalsSoon * 0.4)
