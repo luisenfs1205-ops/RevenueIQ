@@ -155,6 +155,10 @@
             color: var(--primary);
         }
 
+        .portal-message.error {
+            color: #b42318;
+        }
+
         .side-title {
             margin: 0 0 14px;
             font-size: 1.25rem;
@@ -382,17 +386,56 @@
         mainFileInput.addEventListener("change", renderFiles);
         extraFilesInput.addEventListener("change", renderFiles);
 
-        uploadForm.addEventListener("submit", (e) => {
+        uploadForm.addEventListener("submit", async (e) => {
             e.preventDefault();
 
             const hasMainFile = mainFileInput.files && mainFileInput.files.length > 0;
 
             if (!hasMainFile) {
+                portalMsg.classList.add("error");
                 portalMsg.textContent = "Sube al menos un archivo principal para continuar.";
                 return;
             }
 
-            portalMsg.textContent = "Tus archivos quedaron listos para revisión. El guardado real del archivo se conecta en el siguiente paso.";
+            portalMsg.classList.remove("error");
+            portalMsg.textContent = "Subiendo archivo...";
+
+            const formData = new FormData();
+            formData.append("businessName", portalBusinessName.value.trim());
+            formData.append("email", portalEmail.value.trim());
+            formData.append("phone", portalPhone.value.trim());
+            formData.append("businessType", document.getElementById("businessType").value);
+            formData.append("periodCovered", document.getElementById("periodCovered").value.trim());
+            formData.append("notes", document.getElementById("notes").value.trim());
+            formData.append("mainFile", mainFileInput.files[0]);
+
+            try {
+                const res = await fetch("/api/upload-analysis", {
+                    method: "POST",
+                    body: formData
+                });
+
+                const data = await res.json();
+
+                if (!res.ok || !data.ok) {
+                    portalMsg.classList.add("error");
+                    portalMsg.textContent = data.message || "No pude guardar el archivo.";
+                    return;
+                }
+
+                portalMsg.classList.remove("error");
+                portalMsg.textContent = data.message || "Archivo recibido correctamente.";
+
+                uploadForm.reset();
+                portalBusinessName.value = storedBusinessName;
+                portalEmail.value = storedEmail;
+                portalPhone.value = storedPhone;
+                fileList.innerHTML = `<div class="file-chip">Aún no has seleccionado archivos.</div>`;
+
+            } catch {
+                portalMsg.classList.add("error");
+                portalMsg.textContent = "No pude subir el archivo.";
+            }
         });
     </script>
 </body>
