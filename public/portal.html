@@ -1,6 +1,400 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2821
-\cocoatextscaling0\cocoaplatform0{\fonttbl}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RevenueIQ Fitness — Portal de carga</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        .portal {
+            padding: 56px 0 90px;
+        }
+
+        .portal-shell {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 28px;
+            align-items: start;
+        }
+
+        .portal-panel,
+        .portal-side {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(219, 228, 240, 0.95);
+            border-radius: 28px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .portal-panel {
+            padding: 30px;
+        }
+
+        .portal-side {
+            padding: 24px;
+            position: sticky;
+            top: 110px;
+        }
+
+        .portal-title {
+            margin: 10px 0 12px;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            line-height: 1;
+            letter-spacing: -0.06em;
+            color: #0b1530;
+        }
+
+        .portal-sub {
+            margin: 0 0 24px;
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 1.04rem;
+        }
+
+        .portal-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .portal-field label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #344054;
+        }
+
+        .portal-field input,
+        .portal-field select,
+        .portal-field textarea {
+            width: 100%;
+            min-height: 56px;
+            padding: 14px 16px;
+            border-radius: 16px;
+            border: 1px solid #dbe4f0;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text);
+            outline: none;
+            transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+        }
+
+        .portal-field textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .portal-field input:focus,
+        .portal-field select:focus,
+        .portal-field textarea:focus {
+            border-color: rgba(37, 99, 235, 0.42);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .upload-box {
+            border: 1.5px dashed #b9cae4;
+            border-radius: 22px;
+            padding: 24px;
+            background: linear-gradient(180deg, rgba(248, 250, 252, 0.95), rgba(255, 255, 255, 0.95));
+        }
+
+        .upload-box h3 {
+            margin: 0 0 8px;
+            font-size: 1.2rem;
+            letter-spacing: -0.03em;
+            color: #0b1530;
+        }
+
+        .upload-box p {
+            margin: 0 0 16px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .file-list {
+            margin-top: 14px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .file-chip {
+            padding: 12px 14px;
+            border-radius: 14px;
+            background: #f8fbff;
+            border: 1px solid #dbe4f0;
+            color: #344054;
+            font-size: 0.96rem;
+        }
+
+        .portal-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+
+        .ghost-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 56px;
+            padding: 0 22px;
+            border-radius: 999px;
+            border: 1px solid #dbe4f0;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--text);
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .portal-message {
+            min-height: 24px;
+            margin-top: 14px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .side-title {
+            margin: 0 0 14px;
+            font-size: 1.25rem;
+            letter-spacing: -0.03em;
+            color: #0b1530;
+        }
+
+        .side-card {
+            padding: 16px;
+            border-radius: 18px;
+            background: #f8fbff;
+            border: 1px solid #dbe4f0;
+            margin-bottom: 14px;
+        }
+
+        .side-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #667085;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 6px;
+        }
+
+        .side-value {
+            font-size: 1rem;
+            color: #172033;
+            line-height: 1.5;
+            word-break: break-word;
+        }
+
+        .side-list {
+            margin: 0;
+            padding-left: 18px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .mini-note {
+            margin-top: 10px;
+            color: var(--muted);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 980px) {
+            .portal-shell {
+                grid-template-columns: 1fr;
+            }
+
+            .portal-side {
+                position: static;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="nav">
+        <div class="container nav-inner">
+            <a class="logo" href="index.html">Revenue<span>IQ</span></a>
+            <a class="nav-link" href="index.html">Volver al inicio</a>
+            <a class="nav-link" href="index.html#features">Features</a>
+            <a class="nav-cta" href="index.html">Regresar</a>
+        </div>
+    </header>
+
+    <main class="portal">
+        <div class="container portal-shell">
+            <section class="portal-panel">
+                <p class="eyebrow">Portal de carga de archivos</p>
+                <h1 class="portal-title">Sube la información de tu negocio</h1>
+                <p class="portal-sub">
+                    Comparte tu base de datos en Excel o CSV para que podamos revisar tu operación
+                    y preparar un análisis de retención más detallado.
+                </p>
+
+                <form id="uploadForm" class="portal-grid">
+                    <div class="portal-field">
+                        <label for="portalBusinessName">Nombre del negocio</label>
+                        <input id="portalBusinessName" type="text" placeholder="Nombre del negocio" />
+                    </div>
+
+                    <div class="portal-field">
+                        <label for="portalEmail">Correo</label>
+                        <input id="portalEmail" type="email" placeholder="tu@negocio.com" />
+                    </div>
+
+                    <div class="portal-field">
+                        <label for="portalPhone">Teléfono</label>
+                        <input id="portalPhone" type="tel" placeholder="Teléfono" />
+                    </div>
+
+                    <div class="portal-field">
+                        <label for="businessType">Tipo de negocio</label>
+                        <select id="businessType">
+                            <option value="">Selecciona una opción</option>
+                            <option>Gimnasio</option>
+                            <option>Estudio de Pilates</option>
+                            <option>Club de Pádel</option>
+                            <option>Otro negocio fitness</option>
+                        </select>
+                    </div>
+
+                    <div class="portal-field">
+                        <label for="periodCovered">Periodo de información</label>
+                        <input id="periodCovered" type="text" placeholder="Ej. Enero - Marzo 2026" />
+                    </div>
+
+                    <div class="upload-box">
+                        <h3>Sube tus archivos</h3>
+                        <p>
+                            Acepta archivos Excel o CSV con información de asistencia, renovaciones,
+                            cancelaciones o base de miembros.
+                        </p>
+
+                        <div class="portal-field">
+                            <label for="mainFile">Archivo principal</label>
+                            <input id="mainFile" type="file" accept=".xlsx,.xls,.csv" />
+                        </div>
+
+                        <div class="portal-field">
+                            <label for="extraFiles">Archivos adicionales</label>
+                            <input id="extraFiles" type="file" accept=".xlsx,.xls,.csv" multiple />
+                        </div>
+
+                        <div id="fileList" class="file-list">
+                            <div class="file-chip">Aún no has seleccionado archivos.</div>
+                        </div>
+                    </div>
+
+                    <div class="portal-field">
+                        <label for="notes">Notas adicionales</label>
+                        <textarea id="notes"
+                            placeholder="Cuéntanos algo importante sobre tu base de datos o tu negocio."></textarea>
+                    </div>
+
+                    <div class="portal-actions">
+                        <button class="btn primary" type="submit">Enviar archivos para análisis</button>
+                        <a class="ghost-btn" href="index.html">Volver a la landing</a>
+                    </div>
+
+                    <p id="portalMsg" class="portal-message" aria-live="polite"></p>
+                </form>
+            </section>
+
+            <aside class="portal-side">
+                <h2 class="side-title">Resumen del cliente</h2>
+
+                <div class="side-card">
+                    <div class="side-label">Negocio</div>
+                    <div id="summaryBusiness" class="side-value">No disponible</div>
+                </div>
+
+                <div class="side-card">
+                    <div class="side-label">Correo</div>
+                    <div id="summaryEmail" class="side-value">No disponible</div>
+                </div>
+
+                <div class="side-card">
+                    <div class="side-label">Teléfono</div>
+                    <div id="summaryPhone" class="side-value">No disponible</div>
+                </div>
+
+                <div class="side-card">
+                    <div class="side-label">Qué subir aquí</div>
+                    <ul class="side-list">
+                        <li>Base de miembros</li>
+                        <li>Asistencia o visitas</li>
+                        <li>Renovaciones o vencimientos</li>
+                        <li>Cancelaciones o bajas</li>
+                    </ul>
+                    <p class="mini-note">
+                        Este portal organiza la información para análisis posterior. El procesamiento
+                        final de los archivos se realiza fuera de esta demo.
+                    </p>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <script>
+        const storedBusinessName = localStorage.getItem("businessName") || "";
+        const storedEmail = localStorage.getItem("email") || "";
+        const storedPhone = localStorage.getItem("phone") || "";
+
+        const portalBusinessName = document.getElementById("portalBusinessName");
+        const portalEmail = document.getElementById("portalEmail");
+        const portalPhone = document.getElementById("portalPhone");
+
+        const summaryBusiness = document.getElementById("summaryBusiness");
+        const summaryEmail = document.getElementById("summaryEmail");
+        const summaryPhone = document.getElementById("summaryPhone");
+
+        portalBusinessName.value = storedBusinessName;
+        portalEmail.value = storedEmail;
+        portalPhone.value = storedPhone;
+
+        summaryBusiness.textContent = storedBusinessName || "No disponible";
+        summaryEmail.textContent = storedEmail || "No disponible";
+        summaryPhone.textContent = storedPhone || "No disponible";
+
+        const mainFileInput = document.getElementById("mainFile");
+        const extraFilesInput = document.getElementById("extraFiles");
+        const fileList = document.getElementById("fileList");
+        const uploadForm = document.getElementById("uploadForm");
+        const portalMsg = document.getElementById("portalMsg");
+
+        function renderFiles() {
+            const files = [
+                ...(mainFileInput.files ? Array.from(mainFileInput.files) : []),
+                ...(extraFilesInput.files ? Array.from(extraFilesInput.files) : [])
+            ];
+
+            if (!files.length) {
+                fileList.innerHTML = `<div class="file-chip">Aún no has seleccionado archivos.</div>`;
+                return;
+            }
+
+            fileList.innerHTML = files
+                .map(file => `<div class="file-chip">${file.name}</div>`)
+                .join("");
+        }
+
+        mainFileInput.addEventListener("change", renderFiles);
+        extraFilesInput.addEventListener("change", renderFiles);
+
+        uploadForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const hasMainFile = mainFileInput.files && mainFileInput.files.length > 0;
+
+            if (!hasMainFile) {
+                portalMsg.textContent = "Sube al menos un archivo principal para continuar.";
+                return;
+            }
+
+            portalMsg.textContent = "Tus archivos quedaron listos para revisión. El guardado real del archivo se conecta en el siguiente paso.";
+        });
+    </script>
+</body>
+
+</html>
