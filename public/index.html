@@ -12,7 +12,7 @@
   <header class="nav">
     <div class="container nav-inner">
       <div class="logo">Revenue<span>IQ</span></div>
-      <a class="nav-link" href="#como-funciona">Cómo funciona</a>
+      <a class="nav-link" href="#simulador">Cómo funciona</a>
       <a class="nav-link" href="#features">Features</a>
       <a class="nav-cta" href="#cta">Solicitar análisis</a>
     </div>
@@ -34,7 +34,7 @@
 
           <div class="hero-actions">
             <a class="btn primary" href="#cta">Solicita tu análisis</a>
-            <a class="btn secondary" href="#como-funciona">Ver cómo funciona</a>
+            <a class="btn secondary" href="#simulador">Ver simulador</a>
           </div>
 
           <div class="trust">
@@ -82,7 +82,85 @@
               </div>
             </div>
           </div>
-          <p class="mock-note">Mock conceptual: análisis de retención para negocios fitness.</p>
+          <p class="mock-note">
+            Ejemplo de análisis generado por RevenueIQ. Los resultados reales se entregan
+            en el reporte personalizado.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="simulador" class="simulator">
+      <div class="container simulator-inner">
+        <div class="sim-copy">
+          <p class="eyebrow">Simulador de riesgo</p>
+          <h2>Haz una simulación rápida de tu negocio</h2>
+          <p>
+            Ingresa algunos datos de tu gimnasio, estudio o club y obtén una
+            estimación inicial de miembros en riesgo. El análisis completo incluye
+            segmentación, alertas y recomendaciones de retención.
+          </p>
+        </div>
+
+        <div class="sim-card">
+          <div class="sim-grid">
+            <div>
+              <label for="activeMembers">Miembros activos</label>
+              <input id="activeMembers" type="number" placeholder="Ej. 180" min="1" />
+            </div>
+
+            <div>
+              <label for="lowAttendance">Miembros con baja asistencia</label>
+              <input id="lowAttendance" type="number" placeholder="Ej. 24" min="0" />
+            </div>
+
+            <div>
+              <label for="renewalsSoon">Renovaciones próximas (7 días)</label>
+              <input id="renewalsSoon" type="number" placeholder="Ej. 18" min="0" />
+            </div>
+          </div>
+
+          <button id="simulateBtn" class="btn primary" type="button">
+            Calcular estimación
+          </button>
+
+          <div id="simResult" class="sim-result">
+            <p class="sim-placeholder">
+              Aquí aparecerá una estimación inicial de riesgo.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="simulator">
+      <div class="container simulator-inner">
+        <div class="sim-copy">
+          <p class="eyebrow">Lo que recibe tu negocio</p>
+          <h2>Una vista clara de tu riesgo de cancelación</h2>
+          <p>
+            RevenueIQ no solo estima el riesgo. También te ayuda a entender qué está
+            pasando y qué hacer para retener más miembros.
+          </p>
+        </div>
+
+        <div class="sim-card">
+          <div class="sim-grid">
+            <div class="sim-result">
+              <p><strong>✔ Detección de miembros en riesgo</strong></p>
+              <p>Identifica señales de abandono antes de que la cancelación ocurra.</p>
+            </div>
+
+            <div class="sim-result">
+              <p><strong>✔ Alertas de retención</strong></p>
+              <p>Detecta inactividad, renovaciones próximas y cambios de comportamiento.</p>
+            </div>
+
+            <div class="sim-result">
+              <p><strong>✔ Recomendaciones accionables</strong></p>
+              <p>Obtén acciones concretas para recuperar miembros y proteger ingresos.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

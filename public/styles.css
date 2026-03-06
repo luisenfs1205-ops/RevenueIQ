@@ -533,3 +533,104 @@ h1 {
         font-size: 0.98rem;
     }
 }
+
+.simulator {
+    padding: 40px 0 80px;
+}
+
+.simulator-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    align-items: start;
+}
+
+.sim-copy h2 {
+    margin: 10px 0 14px;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.02;
+    letter-spacing: -0.05em;
+    color: #0b1530;
+}
+
+.sim-copy p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.06rem;
+    line-height: 1.75;
+}
+
+.sim-card {
+    padding: 26px;
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(219, 228, 240, 0.95);
+    box-shadow: var(--shadow-soft);
+}
+
+.sim-grid {
+    display: grid;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.sim-grid label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #344054;
+}
+
+.sim-grid input {
+    width: 100%;
+    min-height: 56px;
+    padding: 0 16px;
+    border-radius: 16px;
+    border: 1px solid #dbe4f0;
+    background: #fff;
+    outline: none;
+}
+
+.sim-grid input:focus {
+    border-color: rgba(37, 99, 235, 0.42);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+.sim-result {
+    margin-top: 18px;
+    padding: 18px;
+    border-radius: 20px;
+    background: #f8fbff;
+    border: 1px solid #dbe4f0;
+}
+
+.sim-output h3 {
+    margin: 0 0 10px;
+    font-size: 1.5rem;
+    line-height: 1.1;
+    color: #0b1530;
+}
+
+.sim-output p,
+.sim-placeholder,
+.sim-error {
+    margin: 8px 0;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.sim-note {
+    margin-top: 12px;
+    font-size: 0.95rem;
+}
+
+.sim-error {
+    color: #b42318;
+}
+
+@media (max-width: 900px) {
+    .simulator-inner {
+        grid-template-columns: 1fr;
+    }
+}
