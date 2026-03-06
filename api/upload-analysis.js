@@ -68,7 +68,7 @@ export default async function handler(req, res) {
         const buffer = Buffer.from(arrayBuffer);
 
         const blob = await put(`analysis-uploads/${Date.now()}-${file.name}`, buffer, {
-            access: "public",
+            access: "private",
             contentType: file.type || "application/octet-stream",
         });
 
