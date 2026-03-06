@@ -153,6 +153,7 @@
             font-size: 0.95rem;
             font-weight: 600;
             color: var(--primary);
+            line-height: 1.5;
         }
 
         .portal-message.error {
@@ -389,7 +390,19 @@
         uploadForm.addEventListener("submit", async (e) => {
             e.preventDefault();
 
+            const businessName = portalBusinessName.value.trim();
+            const email = portalEmail.value.trim();
+            const phone = portalPhone.value.trim();
+            const businessType = document.getElementById("businessType").value;
+            const periodCovered = document.getElementById("periodCovered").value.trim();
+            const notes = document.getElementById("notes").value.trim();
             const hasMainFile = mainFileInput.files && mainFileInput.files.length > 0;
+
+            if (!businessName || !email || !phone) {
+                portalMsg.classList.add("error");
+                portalMsg.textContent = "Completa nombre del negocio, correo y teléfono.";
+                return;
+            }
 
             if (!hasMainFile) {
                 portalMsg.classList.add("error");
@@ -401,12 +414,12 @@
             portalMsg.textContent = "Subiendo archivo...";
 
             const formData = new FormData();
-            formData.append("businessName", portalBusinessName.value.trim());
-            formData.append("email", portalEmail.value.trim());
-            formData.append("phone", portalPhone.value.trim());
-            formData.append("businessType", document.getElementById("businessType").value);
-            formData.append("periodCovered", document.getElementById("periodCovered").value.trim());
-            formData.append("notes", document.getElementById("notes").value.trim());
+            formData.append("businessName", businessName);
+            formData.append("email", email);
+            formData.append("phone", phone);
+            formData.append("businessType", businessType);
+            formData.append("periodCovered", periodCovered);
+            formData.append("notes", notes);
             formData.append("mainFile", mainFileInput.files[0]);
 
             try {
@@ -415,11 +428,19 @@
                     body: formData
                 });
 
-                const data = await res.json();
+                const text = await res.text();
+
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch {
+                    throw new Error(`Respuesta no JSON: ${text}`);
+                }
 
                 if (!res.ok || !data.ok) {
                     portalMsg.classList.add("error");
-                    portalMsg.textContent = data.message || "No pude guardar el archivo.";
+                    portalMsg.textContent = data.message || data.error || "No pude guardar el archivo.";
+                    console.error("UPLOAD_ERROR:", data);
                     return;
                 }
 
@@ -430,11 +451,15 @@
                 portalBusinessName.value = storedBusinessName;
                 portalEmail.value = storedEmail;
                 portalPhone.value = storedPhone;
+                summaryBusiness.textContent = storedBusinessName || "No disponible";
+                summaryEmail.textContent = storedEmail || "No disponible";
+                summaryPhone.textContent = storedPhone || "No disponible";
                 fileList.innerHTML = `<div class="file-chip">Aún no has seleccionado archivos.</div>`;
 
-            } catch {
+            } catch (error) {
                 portalMsg.classList.add("error");
-                portalMsg.textContent = "No pude subir el archivo.";
+                portalMsg.textContent = error.message || "No pude subir el archivo.";
+                console.error("FETCH_UPLOAD_ERROR:", error);
             }
         });
     </script>
