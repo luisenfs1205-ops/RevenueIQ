@@ -6,6 +6,7 @@ const msg = document.getElementById("msg");
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
+
   msg.textContent = "Enviando...";
 
   const businessName = businessNameInput.value.trim();
@@ -18,29 +19,51 @@ form.addEventListener("submit", async (e) => {
   }
 
   try {
+
     const res = await fetch("/api/leads", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ businessName, phone, email })
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        businessName,
+        phone,
+        email
+      })
     });
 
     const data = await res.json();
-    msg.textContent = data.message || "Listo.";
+
+    console.log("RESPUESTA API:", data);
+    console.log("STATUS:", res.status);
+
+    msg.textContent = data.message || "Datos enviados.";
 
     if (data.ok) {
 
-      // guardar datos temporalmente para usarlos en portal.html
+      console.log("REDIRIGIENDO AL PORTAL...");
+
+      // guardar datos temporalmente
       localStorage.setItem("businessName", businessName);
       localStorage.setItem("phone", phone);
       localStorage.setItem("email", email);
 
-      // redirigir al portal para subir archivos
-      window.location.href = "portal.html";
+      // redirigir al portal
+      window.location.href = "/portal.html";
+
+    } else {
+
+      msg.textContent = data.message || "No pude guardar el lead.";
 
     }
 
-  } catch {
-    msg.textContent = "No pude guardar los datos. Revisa que el servidor esté prendido.";
+  } catch (error) {
+
+    console.error("ERROR:", error);
+
+    msg.textContent =
+      "No pude guardar los datos. Revisa la conexión con el servidor.";
+
   }
 });
 
