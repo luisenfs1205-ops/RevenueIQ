@@ -1,5 +1,3 @@
-alert("SCRIPT CARGADO");
-
 const form = document.getElementById("leadForm");
 const businessNameInput = document.getElementById("businessName");
 const phoneInput = document.getElementById("phone");
